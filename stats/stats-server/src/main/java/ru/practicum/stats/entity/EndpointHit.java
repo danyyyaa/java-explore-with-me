@@ -3,6 +3,7 @@ package ru.practicum.stats.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -27,5 +28,5 @@ public class EndpointHit {
     private String ip;
 
     @Column(name = "timestamp")
-    private String timestamp;
+    private LocalDateTime timestamp;
 }
