@@ -2,13 +2,14 @@ package ru.practicum.stats.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.stats.dto.ViewStatsResponseDto;
 import ru.practicum.stats.entity.EndpointHit;
 import ru.practicum.stats.repository.EndpointHitRepository;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +23,23 @@ public class EndpointHitServiceImpl implements EndpointHitService {
     }
 
     @Override
-    public ViewStatsResponseDto getVisitStats(LocalDateTime start, LocalDateTime end,
-                                              List<String> uris, boolean unique) {
-        return null;
-    }
+    @Transactional(readOnly = true)
+    public Collection<ViewStatsResponseDto> getVisitStats(LocalDateTime start, LocalDateTime end,
+                                                          Set<String> uris, boolean unique) {
 
+        if (unique) {
+            if (uris != null) {
+                return endpointHitRepository.getAllHitsByTimestampAndUriUnique(uris, start, end);
+            } else {
+                return endpointHitRepository.getAllByTimestampUnique(start, end);
+            }
+
+        } else {
+            if (uris != null) {
+                return endpointHitRepository.getAllByTimestampAndUriNotUnique(uris, start, end);
+            } else {
+                return endpointHitRepository.getAllByTimestampAndUriNotUnique(start, end);
+            }
+        }
+    }
 }

@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class ViewStatsResponseDto {
     private String app;
     private String uri;
-    private Long hits;
+    private long hits;
 }

@@ -4,13 +4,14 @@ import ru.practicum.stats.dto.ViewStatsResponseDto;
 import ru.practicum.stats.entity.EndpointHit;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
 
 public interface EndpointHitService {
 
     EndpointHit saveEndpointHit(EndpointHit endpointHit);
 
-    ViewStatsResponseDto getVisitStats(LocalDateTime start, LocalDateTime end,
-                                       List<String> uris, boolean unique);
+    Collection<ViewStatsResponseDto> getVisitStats(LocalDateTime start, LocalDateTime end,
+                                                   Set<String> uris, boolean unique);
 
 }

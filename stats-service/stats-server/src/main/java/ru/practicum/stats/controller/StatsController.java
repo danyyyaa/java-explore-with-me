@@ -13,7 +13,8 @@ import ru.practicum.stats.service.EndpointHitService;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
 
 import static ru.practicum.stats.util.Constant.TIME_PATTERN;
 
@@ -34,10 +35,10 @@ public class StatsController {
     }
 
     @GetMapping("/stats")
-    public ViewStatsResponseDto getStats(@RequestParam @DateTimeFormat(pattern = TIME_PATTERN) LocalDateTime start,
-                                         @RequestParam @DateTimeFormat(pattern = TIME_PATTERN) LocalDateTime end,
-                                         @RequestParam(required = false) List<String> uris,
-                                         @RequestParam(defaultValue = "false") boolean unique) {
+    public Collection<ViewStatsResponseDto> getStats(@RequestParam @DateTimeFormat(pattern = TIME_PATTERN) LocalDateTime start,
+                                                     @RequestParam @DateTimeFormat(pattern = TIME_PATTERN) LocalDateTime end,
+                                                     @RequestParam(required = false) Set<String> uris,
+                                                     @RequestParam(defaultValue = "false") boolean unique) {
         return endpointHitService.getVisitStats(start, end, uris, unique);
     }
 }
