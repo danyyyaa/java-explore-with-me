@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -19,15 +19,17 @@ import static ru.practicum.stats.util.Constant.TIME_PATTERN;
 public class EndpointHitRequestDto {
 
     @Size(max = 255)
+    @NotBlank
     private String app;
 
     @Size(max = 255)
+    @NotBlank
     private String uri;
 
     @Size(max = 255)
+    @NotBlank
     private String ip;
 
     @JsonFormat(pattern = TIME_PATTERN)
-    @DateTimeFormat(pattern = TIME_PATTERN)
     private LocalDateTime timestamp;
 }

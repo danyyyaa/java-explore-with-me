@@ -25,13 +25,14 @@ import static ru.practicum.stats.util.Constant.TIME_PATTERN;
 public class StatsController {
 
     private final EndpointHitService endpointHitService;
+    private final EndpointHitMapper endpointHitMapper;
 
     @PostMapping("/hit")
     public EndpointHitResponseDto saveHit(@Valid @RequestBody EndpointHitRequestDto endpointHitRequestDto) {
         EndpointHit endpointHit = endpointHitService.saveEndpointHit(
-                EndpointHitMapper.INSTANCE.toEndpointHit(endpointHitRequestDto));
+                endpointHitMapper.toEndpointHit(endpointHitRequestDto));
 
-        return EndpointHitMapper.INSTANCE.toEndpointHitResponseDto(endpointHit);
+        return endpointHitMapper.toEndpointHitResponseDto(endpointHit);
     }
 
     @GetMapping("/stats")

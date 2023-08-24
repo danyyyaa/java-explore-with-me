@@ -27,19 +27,9 @@ public class EndpointHitServiceImpl implements EndpointHitService {
     public Collection<ViewStatsResponseDto> getVisitStats(LocalDateTime start, LocalDateTime end,
                                                           Set<String> uris, boolean unique) {
 
-        if (unique) {
-            if (uris != null) {
-                return endpointHitRepository.getAllHitsByTimestampAndUriUnique(uris, start, end);
-            } else {
-                return endpointHitRepository.getAllByTimestampUnique(start, end);
-            }
-
-        } else {
-            if (uris != null) {
-                return endpointHitRepository.getAllByTimestampAndUriNotUnique(uris, start, end);
-            } else {
-                return endpointHitRepository.getAllByTimestampAndUriNotUnique(start, end);
-            }
-        }
+        return unique
+                ? endpointHitRepository.getAllHitsByTimestampAndUriUnique(uris, start, end)
+                : endpointHitRepository.getAllByTimestampAndUriNotUnique(uris, start, end);
     }
 }
+
