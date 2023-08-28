@@ -3,7 +3,6 @@ package ru.practicum.stats.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.stats.aspect.ToLog;
 import ru.practicum.stats.dto.EndpointHitRequestDto;
 import ru.practicum.stats.dto.EndpointHitResponseDto;
 import ru.practicum.stats.dto.ViewStatsResponseDto;
@@ -21,7 +20,6 @@ import static ru.practicum.stats.util.Constant.TIME_PATTERN;
 @RestController
 @RequestMapping
 @RequiredArgsConstructor
-@ToLog
 public class StatsController {
 
     private final EndpointHitService endpointHitService;
