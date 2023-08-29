@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 public class UserShortDto {
+
     private Long id;
 
     @NotBlank

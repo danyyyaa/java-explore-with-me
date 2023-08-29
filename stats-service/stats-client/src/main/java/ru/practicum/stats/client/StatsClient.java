@@ -13,16 +13,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-import static ru.practicum.stats.util.Constant.TIME_PATTERN;
+import static ru.practicum.Constant.TIME_PATTERN;
 
 @Service
 public class StatsClient extends BaseClient {
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_PATTERN);
 
-    public StatsClient(@Value("${stats-server.url}") String serverUrl, RestTemplateBuilder builder) {
+    @Value("${stats-server.url}")
+    private String serverUrl;
+
+    public StatsClient(/*@Value("${stats-server.url}") String serverUrl, */RestTemplateBuilder builder) {
         super(builder
-                .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
+                .uriTemplateHandler(new DefaultUriBuilderFactory(/*serverUrl*/))
                 .requestFactory(HttpComponentsClientHttpRequestFactory::new)
                 .build());
     }

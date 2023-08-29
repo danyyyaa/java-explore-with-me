@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-import static ru.practicum.main.util.Constant.TIME_PATTERN;
+import static ru.practicum.Constant.TIME_PATTERN;
 
 @Data
 @AllArgsConstructor

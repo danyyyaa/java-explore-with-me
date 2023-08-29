@@ -10,7 +10,7 @@ import ru.practicum.main.entity.enums.EventPublishedStatus;
 
 import java.time.LocalDateTime;
 
-import static ru.practicum.main.util.Constant.TIME_PATTERN;
+import static ru.practicum.Constant.TIME_PATTERN;
 
 @Data
 @AllArgsConstructor
@@ -20,8 +20,12 @@ public class RequestResponseDto {
 
     @JsonFormat(pattern = TIME_PATTERN)
     private LocalDateTime created;
+
     private EventFullDto eventResponseDto;
+
     private Long id;
+
     private Long requester;
+
     private EventPublishedStatus status;
 }

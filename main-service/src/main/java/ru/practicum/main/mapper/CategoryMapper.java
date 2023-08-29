@@ -7,6 +7,6 @@ import ru.practicum.main.entity.Category;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
-    Category toCategory(NewCategoryDto categoryCreateRequestDto);
-    CategoryDto toCategoryResponseDto(Category category);
+    Category toCategory(NewCategoryDto newCategoryDto);
+    CategoryDto toCategoryDto(Category category);
 }

@@ -12,7 +12,7 @@ import ru.practicum.main.entity.enums.EventPublishedStatus;
 
 import java.time.LocalDateTime;
 
-import static ru.practicum.main.util.Constant.TIME_PATTERN;
+import static ru.practicum.Constant.TIME_PATTERN;
 
 @Data
 @AllArgsConstructor
@@ -20,24 +20,35 @@ import static ru.practicum.main.util.Constant.TIME_PATTERN;
 @Builder(toBuilder = true)
 public class EventFullDto {
     private String annotation;
+
     private CategoryDto category;
+
     private Long confirmedRequests;
 
     @JsonFormat(pattern = TIME_PATTERN)
     private LocalDateTime createdOn;
+
     private String description;
 
     @JsonFormat(pattern = TIME_PATTERN)
     private LocalDateTime eventDate;
+
     private UserShortDto initiator;
+
     private LocationDtoCoordinates location;
+
     private Boolean paid;
+
     private Long participantLimit;
 
     @JsonFormat(pattern = TIME_PATTERN)
     private LocalDateTime publishedOn;
+
     private Boolean requestModeration;
+
     private EventPublishedStatus published;
+
     private String title;
+
     private Long views;
 }

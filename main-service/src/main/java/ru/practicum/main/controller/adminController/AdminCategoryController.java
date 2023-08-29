@@ -11,6 +11,7 @@ import ru.practicum.main.mapper.CategoryMapper;
 import ru.practicum.main.service.CategoryService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/admin/categories")
@@ -23,23 +24,23 @@ public class AdminCategoryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CategoryDto saveCategory(@RequestBody NewCategoryDto dto) {
-        Category category =  categoryService.saveCategory(categoryMapper.toCategory(dto));
-        return categoryMapper.toCategoryResponseDto(category);
+    public CategoryDto saveCategory(@Valid @RequestBody NewCategoryDto dto) {
+        Category category = categoryService.saveCategory(categoryMapper.toCategory(dto));
+        return categoryMapper.toCategoryDto(category);
     }
 
     @DeleteMapping("/{catId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCategoryById(@PathVariable Long catId) {
+    public void deleteCategoryById(@Positive @PathVariable Long catId) {
         categoryService.deleteCategoryById(catId);
     }
 
     @PatchMapping("/{catId}")
-    public CategoryDto changeCategory(@PathVariable Long catId,
-                                      @RequestBody NewCategoryDto dto) {
+    public CategoryDto changeCategory(@Positive @PathVariable Long catId,
+                                      @Valid @RequestBody NewCategoryDto dto) {
         Category category = categoryService
                 .changeCategory(catId, categoryMapper.toCategory(dto));
-        return categoryMapper.toCategoryResponseDto(category);
+        return categoryMapper.toCategoryDto(category);
     }
 }
 

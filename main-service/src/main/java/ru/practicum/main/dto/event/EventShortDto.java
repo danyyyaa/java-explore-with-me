@@ -10,7 +10,7 @@ import ru.practicum.main.dto.user.UserShortDto;
 
 import java.time.LocalDateTime;
 
-import static ru.practicum.main.util.Constant.TIME_PATTERN;
+import static ru.practicum.Constant.TIME_PATTERN;
 
 @Data
 @AllArgsConstructor
@@ -18,15 +18,21 @@ import static ru.practicum.main.util.Constant.TIME_PATTERN;
 @Builder(toBuilder = true)
 public class EventShortDto {
     private String annotation;
+
     private CategoryDto category;
+
     private Long confirmedRequests;
 
     @JsonFormat(pattern = TIME_PATTERN)
     private LocalDateTime eventDate;
 
     private Long id;
+
     private UserShortDto initiator;
+
     private Boolean paid;
+
     private String title;
+
     private Long views;
 }

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
-import static ru.practicum.stats.util.Constant.TIME_PATTERN;
+import static ru.practicum.Constant.TIME_PATTERN;
 
 @RestController
 @RequestMapping

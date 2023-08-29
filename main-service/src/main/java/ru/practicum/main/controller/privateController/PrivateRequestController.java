@@ -10,6 +10,7 @@ import ru.practicum.main.mapper.RequestMapper;
 import ru.practicum.main.service.RequestService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ public class PrivateRequestController {
     private final RequestMapper requestMapper;
 
     @GetMapping
-    public Collection<ParticipationRequestDto> getRequestsToParticipateInOtherEvents(@PathVariable Long userId) {
+    public Collection<ParticipationRequestDto> getRequestsToParticipateInOtherEvents(@Positive @PathVariable Long userId) {
         return requestService.getRequestsToParticipateInOtherEvents(userId)
                 .stream()
                 .map(requestMapper::toParticipationRequestDto)
@@ -32,13 +33,15 @@ public class PrivateRequestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ParticipationRequestDto saveUsersRequest(@PathVariable Long userId, @RequestParam Long eventId) {
+    public ParticipationRequestDto saveUsersRequest(@Positive @PathVariable Long userId,
+                                                    @Positive @RequestParam Long eventId) {
         Request request = requestService.saveUsersRequest(userId, eventId);
         return requestMapper.toParticipationRequestDto(request);
     }
 
     @PatchMapping("/{requestId}/cancel")
-    public ParticipationRequestDto cancelOwnEvent(@PathVariable Long userId, @PathVariable Long requestId) {
+    public ParticipationRequestDto cancelOwnEvent(@Positive @PathVariable Long userId,
+                                                  @Positive @PathVariable Long requestId) {
         Request request = requestService.cancelOwnEvent(userId, requestId);
         return requestMapper.toParticipationRequestDto(request);
     }

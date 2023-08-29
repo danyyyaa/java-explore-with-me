@@ -13,12 +13,11 @@ import ru.practicum.main.util.OffsetBasedPageRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
-
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static ru.practicum.main.util.Constant.PAGE_DEFAULT_FROM;
-import static ru.practicum.main.util.Constant.PAGE_DEFAULT_SIZE;
+import static ru.practicum.Constant.PAGE_DEFAULT_FROM;
+import static ru.practicum.Constant.PAGE_DEFAULT_SIZE;
 
 @RestController
 @RequestMapping("/categories")
@@ -33,14 +32,15 @@ public class PublicCategoryController {
     public Collection<CategoryDto> getAllCategories(@RequestParam(defaultValue = PAGE_DEFAULT_FROM) @PositiveOrZero Integer from,
                                                     @RequestParam(defaultValue = PAGE_DEFAULT_SIZE) @Positive Integer size) {
         Pageable page = new OffsetBasedPageRequest(from, size);
-        return categoryService.getAllCategories(page).stream()
-                .map(categoryMapper::toCategoryResponseDto)
+        return categoryService.getAllCategories(page)
+                .stream()
+                .map(categoryMapper::toCategoryDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{catId}")
-    public CategoryDto getCategoryById(@PathVariable Long catId) {
+    public CategoryDto getCategoryById(@Positive @PathVariable Long catId) {
         Category category = categoryService.getCategoryById(catId);
-        return categoryMapper.toCategoryResponseDto(category);
+        return categoryMapper.toCategoryDto(category);
     }
 }

@@ -13,12 +13,11 @@ import ru.practicum.main.util.OffsetBasedPageRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
-
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import static ru.practicum.main.util.Constant.PAGE_DEFAULT_FROM;
-import static ru.practicum.main.util.Constant.PAGE_DEFAULT_SIZE;
+import static ru.practicum.Constant.PAGE_DEFAULT_FROM;
+import static ru.practicum.Constant.PAGE_DEFAULT_SIZE;
 
 @RestController
 @RequestMapping("/compilations")
@@ -40,7 +39,7 @@ public class PublicCompilationController {
     }
 
     @GetMapping("/{compId}")
-    public CompilationDto getCompilationById(@PathVariable Long compId) {
+    public CompilationDto getCompilationById(@Positive @PathVariable Long compId) {
         Compilation compilation = compilationService.getCompilationById(compId);
         return compilationMapper.toCompilationDto(compilation);
     }

@@ -7,27 +7,14 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <dependencies>
-        <dependency>
-            <groupId>ru.practicum</groupId>
-            <artifactId>util</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+    <artifactId>util</artifactId>
+    <packaging>jar</packaging>
 
-    <artifactId>stats-service</artifactId>
-    <packaging>pom</packaging>
-
-    <name>stats</name>
+    <name>util</name>
     <url>http://maven.apache.org</url>
-    <modules>
-        <module>stats-client</module>
-        <module>stats-dto</module>
-        <module>stats-server</module>
-    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
 </project>

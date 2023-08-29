@@ -26,10 +26,7 @@ public class EndpointHitServiceImpl implements EndpointHitService {
     @Transactional(readOnly = true)
     public Collection<ViewStatsResponseDto> getVisitStats(LocalDateTime start, LocalDateTime end,
                                                           Set<String> uris, boolean unique) {
-
-        return unique
-                ? endpointHitRepository.getAllHitsByTimestampAndUriUnique(uris, start, end)
-                : endpointHitRepository.getAllByTimestampAndUriNotUnique(uris, start, end);
+        return endpointHitRepository.getStats(uris, start, end, unique);
     }
 }
 

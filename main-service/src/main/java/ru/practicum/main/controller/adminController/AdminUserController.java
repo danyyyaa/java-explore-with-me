@@ -19,8 +19,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static ru.practicum.main.util.Constant.PAGE_DEFAULT_FROM;
-import static ru.practicum.main.util.Constant.PAGE_DEFAULT_SIZE;
+import static ru.practicum.Constant.PAGE_DEFAULT_FROM;
+import static ru.practicum.Constant.PAGE_DEFAULT_SIZE;
 
 @RestController
 @RequestMapping("/admin/users")
@@ -38,7 +38,7 @@ public class AdminUserController {
         Pageable page = new OffsetBasedPageRequest(from, size);
         return userService.getUsersByIds(ids, page)
                 .stream()
-                .map(userMapper::toResponseDto)
+                .map(userMapper::toUserDto)
                 .collect(Collectors.toList());
     }
 
@@ -46,12 +46,12 @@ public class AdminUserController {
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto saveUser(@Valid @RequestBody NewUserRequestDto newUserRequestDto) {
         User user = userService.saveUser(userMapper.toUser(newUserRequestDto));
-        return userMapper.toResponseDto(user);
+        return userMapper.toUserDto(user);
     }
 
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUserById(@PathVariable Long userId) {
+    public void deleteUserById(@Positive @PathVariable Long userId) {
         userService.deleteById(userId);
     }
 }

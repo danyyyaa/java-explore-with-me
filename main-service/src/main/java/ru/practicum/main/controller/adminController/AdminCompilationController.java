@@ -10,6 +10,7 @@ import ru.practicum.main.dto.request.UpdateCompilationRequest;
 import ru.practicum.main.service.CompilationService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/admin/compilations")
@@ -27,12 +28,13 @@ public class AdminCompilationController {
 
     @DeleteMapping("/{compId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCompilationById(@PathVariable Long compId) {
+    public void deleteCompilationById(@Positive @PathVariable Long compId) {
         compilationService.deleteCompilationById(compId);
     }
 
     @PatchMapping("/{compId}")
-    public CompilationDto changeCompilation(@PathVariable Long compId, @RequestBody UpdateCompilationRequest dto) {
+    public CompilationDto changeCompilation(@Positive @PathVariable Long compId,
+                                            @Valid @RequestBody UpdateCompilationRequest dto) {
         return compilationService.changeCompilation(compId, dto);
     }
 }

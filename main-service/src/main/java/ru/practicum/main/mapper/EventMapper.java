@@ -17,18 +17,12 @@ public interface EventMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "category", source = "category")
     @Mapping(target = "location", source = "location")
-    //@Mapping(target = "createdOn", expression = "java(setLocalDateTimeNow())")
     Event toEvent(NewEventDto newEventDto, Location location, Category category,
                   EventPublishedStatus state, User initiator);
 
     EventShortDto toEventShortDto(Event event);
 
-
     EventFullDto toEventFullDto(Event event, Category category, User initiator);
+
     EventFullDto toEventFullDto(Event event);
-
-    /*default LocalDateTime setLocalDateTimeNow() {
-        return LocalDateTime.now();
-    }*/
-
 }
