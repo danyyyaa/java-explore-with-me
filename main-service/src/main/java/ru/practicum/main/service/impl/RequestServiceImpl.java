@@ -37,7 +37,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public Request saveUsersRequest(Long userId, Long eventId) {
+    public Request saveUserRequest(Long userId, Long eventId) {
         User requester = userRepository.findById(userId).orElseThrow(() ->
                 new NotFoundException(String.format("User %s not found", userId)));
 

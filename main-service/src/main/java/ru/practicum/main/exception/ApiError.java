@@ -15,7 +15,6 @@ import static ru.practicum.Constant.TIME_PATTERN;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 public class ApiError {
-    private StackTraceElement[] errors;
     private String message;
     private String reason;
     private String status;

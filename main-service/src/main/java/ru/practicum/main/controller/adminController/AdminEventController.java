@@ -16,6 +16,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import static ru.practicum.Constant.*;
@@ -33,16 +34,16 @@ public class AdminEventController {
                                                      @RequestParam(defaultValue = PAGE_DEFAULT_SIZE) @Positive Integer size,
                                                      @RequestParam(required = false) @DateTimeFormat(pattern = TIME_PATTERN) LocalDateTime rangeStart,
                                                      @RequestParam(required = false) @DateTimeFormat(pattern = TIME_PATTERN) LocalDateTime rangeEnd,
-                                                     @RequestParam(required = false) Set<EventPublishedStatus> states,
-                                                     @RequestParam(required = false) Set<Long> userIds,
-                                                     @RequestParam(required = false) Set<Long> categoriesIds) {
+                                                     @RequestParam(required = false) List<EventPublishedStatus> states,
+                                                     @RequestParam(required = false) Set<Long> users,
+                                                     @RequestParam(required = false) Set<Long> categories) {
         Pageable page = new OffsetBasedPageRequest(from, size);
-        return eventService.getEventsByAdmin(userIds, categoriesIds, states, rangeStart, rangeEnd, page);
+        return eventService.getEventsByAdmin(users, categories, states, rangeStart, rangeEnd, page);
     }
 
     @PatchMapping("/{eventId}")
     public EventFullDto updateEventByAdmin(@Positive @PathVariable Long eventId,
-                                           @Valid @RequestBody UpdateEventUserRequestDto dto) {
+                                           /*@Valid*/ @RequestBody UpdateEventUserRequestDto dto) {
         return eventService.updateEventByAdmin(eventId, dto);
     }
 }

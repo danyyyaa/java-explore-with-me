@@ -55,7 +55,7 @@ public class PrivateEventController {
     @PatchMapping("/{eventId}")
     public EventFullDto changeEventAddedCurrentUser(@Positive @PathVariable Long userId,
                                                     @Positive @PathVariable Long eventId,
-                                                    @Valid @RequestBody UpdateEventUserRequestDto dto) {
+                                                    /*@Valid*/ @RequestBody UpdateEventUserRequestDto dto) {
         return eventService.changeEventAddedCurrentUser(userId, eventId, dto);
     }
 
@@ -68,7 +68,7 @@ public class PrivateEventController {
     @PatchMapping("/{eventId}/requests")
     public EventRequestStatusUpdateResultDto changeStatusOfRequestsByCurrentUser(@Positive @PathVariable Long userId,
                                                                                  @Positive @PathVariable Long eventId,
-                                                                                 @Valid @RequestBody EventRequestStatusUpdateRequestDto dto) {
+                                                                                 /*@Valid*/ @RequestBody EventRequestStatusUpdateRequestDto dto) {
         return eventService.changeStatusOfRequestsByCurrentUser(userId, eventId, dto); // доделать
     }
 }

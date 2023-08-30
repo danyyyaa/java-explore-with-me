@@ -2,34 +2,41 @@ package ru.practicum.main.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.practicum.main.entity.Category;
+import ru.practicum.main.entity.Event;
+import ru.practicum.main.exception.NotAvailableException;
 import ru.practicum.main.exception.NotFoundException;
 import ru.practicum.main.repository.CategoryRepository;
+import ru.practicum.main.repository.EventRepository;
 import ru.practicum.main.service.CategoryService;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
+    private final EventRepository eventRepository;
 
     @Override
-    @ResponseStatus(HttpStatus.CREATED)
     public Category saveCategory(Category category) {
         return categoryRepository.save(category);
     }
 
     @Override
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategoryById(Long catId) {
         Category category = categoryRepository.findById(catId).orElseThrow(() ->
                 new NotFoundException(String.format("Category %s not found", catId)));
+
+        List<Event> eventsWithCategoryId = eventRepository.findAllByCategoryId(catId);
+
+        if (!eventsWithCategoryId.isEmpty()) {
+            throw new NotAvailableException(String.format("Category %s isn't empty", catId));
+        }
         categoryRepository.delete(category);
     }
 

@@ -34,7 +34,7 @@ public class AdminCompilationController {
 
     @PatchMapping("/{compId}")
     public CompilationDto changeCompilation(@Positive @PathVariable Long compId,
-                                            @Valid @RequestBody UpdateCompilationRequest dto) {
+                                            /*@Valid*/ @RequestBody UpdateCompilationRequest dto) {
         return compilationService.changeCompilation(compId, dto);
     }
 }

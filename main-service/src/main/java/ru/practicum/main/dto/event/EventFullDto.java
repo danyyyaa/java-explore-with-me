@@ -19,6 +19,8 @@ import static ru.practicum.Constant.TIME_PATTERN;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 public class EventFullDto {
+    private Long id;
+
     private String annotation;
 
     private CategoryDto category;
@@ -51,4 +53,6 @@ public class EventFullDto {
     private String title;
 
     private Long views;
+
+    private EventPublishedStatus state;
 }

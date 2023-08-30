@@ -64,7 +64,6 @@ public class ErrorHandler {
 
     private ApiError createErrorResponse(Throwable e, HttpStatus httpStatus) {
         return ApiError.builder()
-                //.errors(e.getStackTrace())
                 .message(e.getMessage())
                 .reason(String.valueOf(e.getCause()))
                 .status(httpStatus.name())
