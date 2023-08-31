@@ -5,8 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.main.dto.compilation.CompilationDto;
-import ru.practicum.main.entity.Compilation;
-import ru.practicum.main.mapper.CompilationMapper;
 import ru.practicum.main.service.CompilationService;
 import ru.practicum.main.util.OffsetBasedPageRequest;
 
@@ -14,7 +12,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import static ru.practicum.Constant.PAGE_DEFAULT_FROM;
 import static ru.practicum.Constant.PAGE_DEFAULT_SIZE;
