@@ -1,3 +1,5 @@
+-- DROP TABLE IF EXISTS endpoint_hits CASCADE;
+
 CREATE TABLE IF NOT EXISTS endpoint_hits
 (
     id        BIGSERIAL PRIMARY KEY,
