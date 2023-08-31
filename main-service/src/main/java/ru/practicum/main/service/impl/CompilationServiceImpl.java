@@ -96,6 +96,7 @@ public class CompilationServiceImpl implements CompilationService {
     private CompilationDto toCompilationDto(Compilation compilation) {
         CompilationDto dto = compilationMapper.toCompilationDto(compilation);
         setConfirmedRequestsToEvent(dto);
+
         return dto;
     }
 
