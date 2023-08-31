@@ -34,7 +34,7 @@ public class PrivateRequestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ParticipationRequestDto saveUserRequest(@Positive @PathVariable Long userId,
-                                                    @Positive @RequestParam Long eventId) {
+                                                   @Positive @RequestParam Long eventId) {
         Request request = requestService.saveUserRequest(userId, eventId);
         return requestMapper.toParticipationRequestDto(request);
     }

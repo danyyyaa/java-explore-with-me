@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import ru.practicum.main.dto.event.EventFullDto;
 import ru.practicum.main.dto.event.EventShortDto;
 import ru.practicum.main.dto.event.NewEventDto;
-import ru.practicum.main.dto.request.*;
+import ru.practicum.main.dto.request.EventRequestStatusUpdateRequestDto;
+import ru.practicum.main.dto.request.EventRequestStatusUpdateResultDto;
+import ru.practicum.main.dto.request.ParticipationRequestDto;
+import ru.practicum.main.dto.request.UpdateEventUserRequestDto;
 import ru.practicum.main.entity.enums.EventPublishedStatus;
 import ru.practicum.main.entity.enums.EventSort;
 

@@ -46,7 +46,7 @@ public class Event {
     private long participantLimit;
 
     @Column(name = "request_moderation")
-    private boolean requestModeration;
+    private Boolean requestModeration;
 
     @Column(name = "title")
     private String title;
@@ -65,4 +65,17 @@ public class Event {
 
     @Column(name = "published_on")
     private LocalDateTime publishedOn;
+
+    @PrePersist
+    public void prePersist() {
+        /*if (paid == null) {
+            paid = false;
+        }
+        if (participantLimit == null) {
+            participantLimit = 0;
+        }*/
+        if (requestModeration == null) {
+            requestModeration = true;
+        }
+    }
 }

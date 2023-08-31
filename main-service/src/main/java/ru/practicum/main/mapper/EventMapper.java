@@ -24,7 +24,7 @@ public interface EventMapper {
 
     EventShortDto toEventShortDto(Event event);
 
-    @Mapping(target = "id",source = "event.id")
+    @Mapping(target = "id", source = "event.id")
     EventFullDto toEventFullDto(Event event, Category category, User initiator);
 
     EventFullDto toEventFullDto(Event event);

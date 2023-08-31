@@ -9,6 +9,8 @@ import ru.practicum.main.entity.User;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     User toUser(NewUserRequestDto newUserRequestDto);
+
     UserDto toUserDto(User user);
+
     UserShortDto toInitiator(User user);
 }

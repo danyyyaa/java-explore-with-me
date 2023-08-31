@@ -16,6 +16,8 @@ import java.util.Set;
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByInitiator_Id(Long id, Pageable pageable);
 
+    List<Event> findAllByIdIn(Collection<Long> eventsId);
+
     List<Event> findAllByCategoryId(Long categoryId);
 
     @Query("select e" +
@@ -40,11 +42,11 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Query("select e from Event e " +
             "where e.state = 'PUBLISHED' " +
-            "and (COALESCE(:text, null) is null or (lower(e.annotation) like lower(concat('%', :text, '%')) or lower(e.description) like lower(concat('%', :text, '%')))) " +
-            "and (COALESCE(:categoryIds, null) is null or e.category.id in :categoryIds) " +
-            "and (COALESCE(:paid, null) is null or e.paid = :paid) " +
+            "and (coalesce(:text, null) is null or (lower(e.annotation) like lower(concat('%', :text, '%')) or lower(e.description) like lower(concat('%', :text, '%')))) " +
+            "and (coalesce(:categoryIds, null) is null or e.category.id in :categoryIds) " +
+            "and (coalesce(:paid, null) is null or e.paid = :paid) " +
             "and e.eventDate >= :rangeStart " +
-            "and (COALESCE(:rangeEnd, null) is null or e.eventDate <= :rangeEnd) " +
+            "and (coalesce(:rangeEnd, null) is null or e.eventDate <= :rangeEnd) " +
             "and (:onlyAvailable = false or e.id in " +
             "(select r.event.id " +
             "from Request r " +

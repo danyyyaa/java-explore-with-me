@@ -26,21 +26,16 @@ import static ru.practicum.Constant.PAGE_DEFAULT_SIZE;
 @Valid
 public class PublicCompilationController {
     private final CompilationService compilationService;
-    private final CompilationMapper compilationMapper;
 
     @GetMapping
     public Collection<CompilationDto> getAllCompilations(@RequestParam(defaultValue = PAGE_DEFAULT_FROM) @PositiveOrZero Integer from,
                                                          @RequestParam(defaultValue = PAGE_DEFAULT_SIZE) @Positive Integer size) {
         Pageable page = new OffsetBasedPageRequest(from, size);
-        return compilationService.getAllCompilations(page)
-                .stream()
-                .map(compilationMapper::toCompilationDto)
-                .collect(Collectors.toList());
+        return compilationService.getAllCompilations(page);
     }
 
     @GetMapping("/{compId}")
     public CompilationDto getCompilationById(@Positive @PathVariable Long compId) {
-        Compilation compilation = compilationService.getCompilationById(compId);
-        return compilationMapper.toCompilationDto(compilation);
+        return compilationService.getCompilationById(compId);
     }
 }
