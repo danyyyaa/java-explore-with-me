@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import ru.practicum.aspect.ToLog;
 import ru.practicum.stats.dto.EndpointHitRequestDto;
 import ru.practicum.stats.dto.EndpointHitResponseDto;
@@ -42,6 +43,9 @@ public class StatsController {
                                                      @RequestParam @DateTimeFormat(pattern = TIME_PATTERN) LocalDateTime end,
                                                      @RequestParam(required = false) Set<String> uris,
                                                      @RequestParam(defaultValue = "false") boolean unique) {
+        if (start.isAfter(end)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "End cannot be earlier that start");
+        }
         return endpointHitService.getVisitStats(start, end, uris, unique);
     }
 }
