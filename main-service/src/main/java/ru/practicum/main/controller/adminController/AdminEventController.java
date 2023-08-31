@@ -3,8 +3,8 @@ package ru.practicum.main.controller.adminController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.event.EventFullDto;
 import ru.practicum.main.dto.request.UpdateEventUserRequestDto;
 import ru.practicum.main.entity.enums.EventPublishedStatus;
@@ -25,7 +25,7 @@ import static ru.practicum.Constant.*;
 @RequestMapping("/admin/events")
 @RequiredArgsConstructor
 @Valid
-@Validated
+@ToLog
 public class AdminEventController {
     private final EventService eventService;
 

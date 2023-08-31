@@ -68,12 +68,6 @@ public class Event {
 
     @PrePersist
     public void prePersist() {
-        /*if (paid == null) {
-            paid = false;
-        }
-        if (participantLimit == null) {
-            participantLimit = 0;
-        }*/
         if (requestModeration == null) {
             requestModeration = true;
         }

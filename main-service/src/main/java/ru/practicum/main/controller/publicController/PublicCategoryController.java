@@ -2,8 +2,8 @@ package ru.practicum.main.controller.publicController;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.category.CategoryDto;
 import ru.practicum.main.entity.Category;
 import ru.practicum.main.mapper.CategoryMapper;
@@ -22,8 +22,8 @@ import static ru.practicum.Constant.PAGE_DEFAULT_SIZE;
 @RestController
 @RequestMapping("/categories")
 @RequiredArgsConstructor
-@Validated
 @Valid
+@ToLog
 public class PublicCategoryController {
     private final CategoryService categoryService;
     private final CategoryMapper categoryMapper;

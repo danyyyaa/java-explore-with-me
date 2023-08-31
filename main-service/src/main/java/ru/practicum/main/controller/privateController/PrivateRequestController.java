@@ -2,8 +2,8 @@ package ru.practicum.main.controller.privateController;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.request.ParticipationRequestDto;
 import ru.practicum.main.entity.Request;
 import ru.practicum.main.mapper.RequestMapper;
@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/users/{userId}/requests")
 @RequiredArgsConstructor
-@Validated
 @Valid
+@ToLog
 public class PrivateRequestController {
     private final RequestService requestService;
     private final RequestMapper requestMapper;

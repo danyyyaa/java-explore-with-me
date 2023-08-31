@@ -2,8 +2,8 @@ package ru.practicum.main.controller.publicController;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.compilation.CompilationDto;
 import ru.practicum.main.service.CompilationService;
 import ru.practicum.main.util.OffsetBasedPageRequest;
@@ -19,8 +19,8 @@ import static ru.practicum.Constant.PAGE_DEFAULT_SIZE;
 @RestController
 @RequestMapping("/compilations")
 @RequiredArgsConstructor
-@Validated
 @Valid
+@ToLog
 public class PublicCompilationController {
     private final CompilationService compilationService;
 

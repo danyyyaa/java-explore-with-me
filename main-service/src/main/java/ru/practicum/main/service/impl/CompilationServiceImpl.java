@@ -34,21 +34,15 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional(readOnly = true)
     public Collection<CompilationDto> getAllCompilations(Pageable pageable) {
-        //return compilationRepository.findAll(pageable).getContent();
-
         return compilationRepository.findAll(pageable).getContent()
                 .stream()
                 .map(this::toCompilationDto)
                 .collect(Collectors.toList());
-
     }
 
     @Override
     @Transactional(readOnly = true)
     public CompilationDto getCompilationById(Long compId) {
-        /*return compilationRepository.findById(compId).orElseThrow(() ->
-                new NotFoundException(String.format("Compilation %s not found", compId)));*/
-
         Compilation compilation = compilationRepository.findById(compId).orElseThrow(() ->
                 new NotFoundException(String.format("Compilation %s not found", compId)));
 
@@ -57,13 +51,6 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public CompilationDto saveCompilation(NewCompilationDto newCompilationDto) {
-        /*List<Event> newEvents = eventRepository.findAllById(newCompilationDto.getEvents());
-
-        Compilation savedCompilation = compilationRepository.save(
-                compilationMapper.toCompilation(newCompilationDto, newEvents));
-
-        return compilationMapper.toCompilationDto(savedCompilation);*/
-
         Compilation compilation = compilationMapper.toCompilation(newCompilationDto);
 
         Set<Long> eventsId = newCompilationDto.getEvents();
@@ -90,7 +77,7 @@ public class CompilationServiceImpl implements CompilationService {
         Compilation toUpdate = compilationRepository.findById(compId).orElseThrow(() ->
                 new NotFoundException(String.format("Compilation %s not found", compId)));
 
-        if (!dto.getTitle().isBlank()) {
+        if (dto.getTitle() != null && !dto.getTitle().isBlank()) {
             toUpdate.setTitle(dto.getTitle());
         }
         if (dto.getPinned() != null) {
@@ -104,9 +91,6 @@ public class CompilationServiceImpl implements CompilationService {
         }
 
         return toCompilationDto(toUpdate);
-
-        /*return compilationMapper.toCompilationDto(
-                compilationRepository.save(toUpdate));*/
     }
 
     private CompilationDto toCompilationDto(Compilation compilation) {

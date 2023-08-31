@@ -63,8 +63,6 @@ public class EventServiceImpl implements EventService {
         Event event = eventMapper.toEvent(dto, savedLocation, category, EventPublishedStatus.PENDING, initiator);
         event.setCreatedOn(LocalDateTime.now());
 
-        //event.setRequestModeration(true);
-
         Event savedEvent = eventRepository.save(event);
 
         return eventMapper.toEventFullDto(savedEvent, category, initiator);
@@ -102,10 +100,12 @@ public class EventServiceImpl implements EventService {
 
         patchUpdateEvent(dto, event);
 
-        if (dto.getStateAction().equals(StateAction.SEND_TO_REVIEW)) {
-            event.setState(EventPublishedStatus.PENDING);
-        } else {
-            event.setState(EventPublishedStatus.CANCELED);
+        if (dto.getStateAction() != null) {
+            if (dto.getStateAction().equals(StateAction.SEND_TO_REVIEW)) {
+                event.setState(EventPublishedStatus.PENDING);
+            } else {
+                event.setState(EventPublishedStatus.CANCELED);
+            }
         }
 
         return mapToEventFullDto(List.of(event)).get(0);
