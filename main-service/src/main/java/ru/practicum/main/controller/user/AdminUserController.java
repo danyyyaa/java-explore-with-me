@@ -1,4 +1,4 @@
-package ru.practicum.main.controller.adminController;
+package ru.practicum.main.controller.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

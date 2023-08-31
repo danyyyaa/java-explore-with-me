@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS categories, users, locations, events, participation_requests, compilations, events_compilations CASCADE;
-
 CREATE TABLE IF NOT EXISTS locations
 (
     id  BIGSERIAL PRIMARY KEY,
