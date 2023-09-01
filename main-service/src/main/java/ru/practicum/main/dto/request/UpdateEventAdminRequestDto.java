@@ -9,6 +9,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 public class UpdateEventAdminRequestDto extends UpdateEventRequest {
     private StateAction stateAction;
+
     public enum StateAction {
         PUBLISH_EVENT,
         REJECT_EVENT
