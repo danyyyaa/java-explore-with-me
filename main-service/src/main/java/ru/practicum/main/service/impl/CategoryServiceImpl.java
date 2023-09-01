@@ -5,7 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.main.entity.Category;
-import ru.practicum.main.entity.Event;
 import ru.practicum.main.exception.NotAvailableException;
 import ru.practicum.main.exception.NotFoundException;
 import ru.practicum.main.repository.CategoryRepository;
@@ -13,7 +12,6 @@ import ru.practicum.main.repository.EventRepository;
 import ru.practicum.main.service.CategoryService;
 
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,12 +30,13 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(catId).orElseThrow(() ->
                 new NotFoundException(String.format("Category %s not found", catId)));
 
-        List<Event> eventsWithCategoryId = eventRepository.findAllByCategoryId(catId);
+        boolean isExist = eventRepository.existsByCategoryId(catId);
 
-        if (!eventsWithCategoryId.isEmpty()) {
+        if (isExist) {
             throw new NotAvailableException(String.format("Category %s isn't empty", catId));
+        } else {
+            categoryRepository.delete(category);
         }
-        categoryRepository.delete(category);
     }
 
     @Override

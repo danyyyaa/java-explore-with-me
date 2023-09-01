@@ -32,7 +32,6 @@ public interface EventService {
                                               LocalDateTime rangeStart, LocalDateTime rangeEnd,
                                               Pageable pageable);
 
-    //EventFullDto updateEventByAdmin(Long eventId, UpdateEventUserRequestDto dto);
     EventFullDto updateEventByAdmin(Long eventId, UpdateEventAdminRequestDto dto);
 
     Collection<EventShortDto> getEventsPublic(String text, Set<Long> categoriesIds, Boolean paid,

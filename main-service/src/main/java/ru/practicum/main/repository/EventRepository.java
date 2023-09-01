@@ -14,11 +14,11 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
+    boolean existsByCategoryId(Long categoryId);
+
     List<Event> findAllByInitiator_Id(Long id, Pageable pageable);
 
     List<Event> findAllByIdIn(Collection<Long> eventsId);
-
-    List<Event> findAllByCategoryId(Long categoryId);
 
     @Query("select e" +
             " from Event e" +
