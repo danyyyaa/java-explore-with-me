@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.event.EventFullDto;
 import ru.practicum.main.dto.request.UpdateEventAdminRequestDto;
-import ru.practicum.main.dto.request.UpdateEventUserRequestDto;
 import ru.practicum.main.entity.enums.EventPublishedStatus;
 import ru.practicum.main.service.EventService;
 import ru.practicum.main.util.OffsetBasedPageRequest;

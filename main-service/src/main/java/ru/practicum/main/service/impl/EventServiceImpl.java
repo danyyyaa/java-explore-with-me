@@ -47,8 +47,6 @@ public class EventServiceImpl implements EventService {
     @Value("${app.name}")
     private String app;
 
-    public static final LocalDateTime START = LocalDateTime.of(2000, 1, 1, 0, 0);
-
     @Override
     public EventFullDto saveEvent(Long userId, NewEventDto dto) {
         User initiator = userRepository.findById(userId).orElseThrow(() ->
@@ -315,21 +313,28 @@ public class EventServiceImpl implements EventService {
                 .map(id -> "/events/" + id)
                 .collect(Collectors.toList());
 
-
-        List<ViewStatsResponseDto> response = statsClient.getStats(START, LocalDateTime.now(), uris, true);
+        Optional<LocalDateTime> start = eventRepository.getStart(eventsId);
 
         Map<Long, Long> views = new HashMap<>();
 
-        response.forEach(dto -> {
-            String uri = dto.getUri();
-            String[] split = uri.split("/");
-            String id = split[2];
-            Long eventId = Long.parseLong(id);
-            views.put(eventId, dto.getHits());
-        });
+        if (start.isPresent()) {
+            List<ViewStatsResponseDto> response = statsClient
+                    .getStats(start.get(), LocalDateTime.now(), uris, true);
+
+            response.forEach(dto -> {
+                String uri = dto.getUri();
+                String[] split = uri.split("/");
+                String id = split[2];
+                Long eventId = Long.parseLong(id);
+                views.put(eventId, dto.getHits());
+            });
+        } else {
+            eventsId.forEach(el -> views.put(el, 0L));
+        }
 
         return views;
     }
+
 
     private void patchUpdateEvent(UpdateEventRequest dto, Event event) {
         if (dto.getAnnotation() != null && !dto.getAnnotation().isBlank()) {

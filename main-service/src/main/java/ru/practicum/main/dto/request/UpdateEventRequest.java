@@ -40,8 +40,6 @@ public class UpdateEventRequest {
 
     private Boolean requestModeration;
 
-    //private StateAction stateAction;
-
     @Length(min = 3, max = 120)
     private String title;
 }

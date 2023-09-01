@@ -58,4 +58,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
                               @Param("paid") Boolean paid, @Param("rangeStart") LocalDateTime rangeStart,
                               @Param("rangeEnd") LocalDateTime rangeEnd, @Param("onlyAvailable") Boolean onlyAvailable,
                               Pageable pageable);
+
+    @Query("SELECT MIN(e.publishedOn) FROM Event e WHERE e.id IN :eventsId")
+    Optional<LocalDateTime> getStart(@Param("eventsId") Collection<Long> eventsId);
 }
