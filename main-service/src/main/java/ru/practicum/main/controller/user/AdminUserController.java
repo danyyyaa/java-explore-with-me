@@ -3,6 +3,7 @@ package ru.practicum.main.controller.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.user.NewUserRequestDto;
@@ -25,7 +26,7 @@ import static ru.practicum.Constant.PAGE_DEFAULT_SIZE;
 @RestController
 @RequestMapping("/admin/users")
 @RequiredArgsConstructor
-@Valid
+@Validated
 @ToLog
 public class AdminUserController {
     private final UserService userService;

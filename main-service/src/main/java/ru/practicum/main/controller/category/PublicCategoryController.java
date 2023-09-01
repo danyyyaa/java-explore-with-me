@@ -2,6 +2,7 @@ package ru.practicum.main.controller.category;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.category.CategoryDto;
@@ -10,7 +11,6 @@ import ru.practicum.main.mapper.CategoryMapper;
 import ru.practicum.main.service.CategoryService;
 import ru.practicum.main.util.OffsetBasedPageRequest;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Collection;
@@ -22,7 +22,7 @@ import static ru.practicum.Constant.PAGE_DEFAULT_SIZE;
 @RestController
 @RequestMapping("/categories")
 @RequiredArgsConstructor
-@Valid
+@Validated
 @ToLog
 public class PublicCategoryController {
     private final CategoryService categoryService;

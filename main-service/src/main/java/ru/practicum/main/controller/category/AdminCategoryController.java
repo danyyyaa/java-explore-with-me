@@ -2,6 +2,7 @@ package ru.practicum.main.controller.category;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.category.CategoryDto;
@@ -16,7 +17,7 @@ import javax.validation.constraints.Positive;
 @RestController
 @RequestMapping("/admin/categories")
 @RequiredArgsConstructor
-@Valid
+@Validated
 @ToLog
 public class AdminCategoryController {
     private final CategoryService categoryService;

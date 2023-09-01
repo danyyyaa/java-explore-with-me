@@ -1,14 +1,10 @@
 package ru.practicum.main.service;
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.PathVariable;
 import ru.practicum.main.dto.event.EventFullDto;
 import ru.practicum.main.dto.event.EventShortDto;
 import ru.practicum.main.dto.event.NewEventDto;
-import ru.practicum.main.dto.request.EventRequestStatusUpdateRequestDto;
-import ru.practicum.main.dto.request.EventRequestStatusUpdateResultDto;
-import ru.practicum.main.dto.request.ParticipationRequestDto;
-import ru.practicum.main.dto.request.UpdateEventUserRequestDto;
+import ru.practicum.main.dto.request.*;
 import ru.practicum.main.entity.enums.EventPublishedStatus;
 import ru.practicum.main.entity.enums.EventSort;
 
@@ -22,7 +18,7 @@ public interface EventService {
 
     Collection<EventShortDto> getEventsAddedByCurrentUser(Long userId, Pageable page);
 
-    EventFullDto getEventAddedCurrentUser(@PathVariable Long userId, @PathVariable Long eventId);
+    EventFullDto getEventAddedCurrentUser(Long userId, Long eventId);
 
     EventFullDto changeEventAddedCurrentUser(Long userId, Long eventId, UpdateEventUserRequestDto dto);
 
@@ -37,6 +33,7 @@ public interface EventService {
                                               Pageable pageable);
 
     EventFullDto updateEventByAdmin(Long eventId, UpdateEventUserRequestDto dto);
+    //EventFullDto updateEventByAdmin(Long eventId, UpdateEventAdminRequestDto dto);
 
     Collection<EventShortDto> getEventsPublic(String text, Set<Long> categoriesIds, Boolean paid,
                                               LocalDateTime rangeStart, LocalDateTime rangeEnd,

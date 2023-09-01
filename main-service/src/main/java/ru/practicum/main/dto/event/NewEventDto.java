@@ -9,8 +9,10 @@ import org.hibernate.validator.constraints.Length;
 import ru.practicum.main.dto.location.LocationDtoCoordinates;
 import ru.practicum.main.validation.EventDateValidator;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 
 import static ru.practicum.Constant.TIME_PATTERN;
@@ -37,14 +39,15 @@ public class NewEventDto {
     @EventDateValidator
     private LocalDateTime eventDate;
 
-    @NotNull
+    @Valid
     private LocationDtoCoordinates location;
 
     private boolean paid;
 
+    @PositiveOrZero
     private long participantLimit;
 
-    private Boolean requestModeration;
+    private boolean requestModeration = true;
 
     @NotBlank
     @Length(min = 3, max = 120)

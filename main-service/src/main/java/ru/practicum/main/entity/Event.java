@@ -65,11 +65,4 @@ public class Event {
 
     @Column(name = "published_on")
     private LocalDateTime publishedOn;
-
-    @PrePersist
-    public void prePersist() {
-        if (requestModeration == null) {
-            requestModeration = true;
-        }
-    }
 }

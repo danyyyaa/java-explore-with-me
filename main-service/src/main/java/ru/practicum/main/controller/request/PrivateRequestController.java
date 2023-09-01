@@ -2,6 +2,7 @@ package ru.practicum.main.controller.request;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.request.ParticipationRequestDto;
@@ -9,7 +10,6 @@ import ru.practicum.main.entity.Request;
 import ru.practicum.main.mapper.RequestMapper;
 import ru.practicum.main.service.RequestService;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/users/{userId}/requests")
 @RequiredArgsConstructor
-@Valid
+@Validated
 @ToLog
 public class PrivateRequestController {
     private final RequestService requestService;

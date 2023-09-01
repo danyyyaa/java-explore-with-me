@@ -3,6 +3,7 @@ package ru.practicum.main.controller.event;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.aspect.ToLog;
 import ru.practicum.main.dto.event.EventFullDto;
@@ -12,7 +13,6 @@ import ru.practicum.main.service.EventService;
 import ru.practicum.main.util.OffsetBasedPageRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
@@ -24,7 +24,7 @@ import static ru.practicum.Constant.*;
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
-@Valid
+@Validated
 @ToLog
 public class PublicEventController {
     private final EventService eventService;

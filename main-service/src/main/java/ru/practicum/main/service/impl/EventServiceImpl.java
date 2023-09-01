@@ -1,6 +1,7 @@
 package ru.practicum.main.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,9 @@ public class EventServiceImpl implements EventService {
     private final RequestRepository requestRepository;
     private final RequestMapper requestMapper;
     private final StatsClient statsClient;
+
+    @Value("${app.name}")
+    private String app;
 
     public static final LocalDateTime START = LocalDateTime.of(2000, 1, 1, 0, 0);
 
@@ -299,8 +303,10 @@ public class EventServiceImpl implements EventService {
     }
 
     private void sendStats(String uri, String ip) {
+
         EndpointHitRequestDto endpointHitRequestDto = EndpointHitRequestDto.builder()
-                .app("main-service")
+                //.app("main-service")
+                .app(app)
                 .uri(uri)
                 .ip(ip)
                 .timestamp(LocalDateTime.now())

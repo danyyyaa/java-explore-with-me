@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import ru.practicum.main.dto.location.LocationDtoCoordinates;
 import ru.practicum.main.entity.enums.StateAction;
 
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 
 import static ru.practicum.Constant.TIME_PATTERN;
@@ -34,6 +35,7 @@ public class UpdateEventAdminRequestDto {
 
     private Boolean paid;
 
+    @PositiveOrZero
     private Long participantLimit;
 
     private Boolean requestModeration;
