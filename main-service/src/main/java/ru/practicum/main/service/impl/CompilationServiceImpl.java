@@ -11,7 +11,7 @@ import ru.practicum.main.dto.request.UpdateCompilationRequest;
 import ru.practicum.main.entity.Compilation;
 import ru.practicum.main.entity.Event;
 import ru.practicum.main.entity.Request;
-import ru.practicum.main.entity.enums.EventRequestStatus;
+import ru.practicum.main.entity.enums.RequestStatus;
 import ru.practicum.main.exception.NotFoundException;
 import ru.practicum.main.mapper.CompilationMapper;
 import ru.practicum.main.repository.CompilationRepository;
@@ -111,7 +111,7 @@ public class CompilationServiceImpl implements CompilationService {
             compilationEvents.forEach(el -> eventIds.add(el.getId()));
 
             List<Request> confirmedRequests = requestRepository.findAllByStatusAndEventIdIn(
-                    EventRequestStatus.CONFIRMED, eventIds);
+                    RequestStatus.CONFIRMED, eventIds);
 
             Map<Long, Long> requests = confirmedRequests.stream()
                     .collect(Collectors.groupingBy(request -> request.getEvent().getId()))

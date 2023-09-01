@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.main.entity.Event;
 import ru.practicum.main.entity.Request;
 import ru.practicum.main.entity.User;
-import ru.practicum.main.entity.enums.EventPublishedStatus;
-import ru.practicum.main.entity.enums.EventRequestStatus;
+import ru.practicum.main.entity.enums.EventStatus;
+import ru.practicum.main.entity.enums.RequestStatus;
 import ru.practicum.main.exception.NotAvailableException;
 import ru.practicum.main.exception.NotFoundException;
 import ru.practicum.main.exception.ValidationException;
@@ -47,12 +47,12 @@ public class RequestServiceImpl implements RequestService {
         if (event.getInitiator().getId().equals(requester.getId())) {
             throw new NotAvailableException("Event initiator cannot add a request to participate in their event");
         }
-        if (!event.getState().equals(EventPublishedStatus.PUBLISHED)) {
+        if (!event.getState().equals(EventStatus.PUBLISHED)) {
             throw new NotAvailableException("Cannot participate in an unpublished event");
         }
 
         Long confirmedRequests = requestRepository.countAllByEventIdAndStatus(eventId,
-                EventRequestStatus.CONFIRMED);
+                RequestStatus.CONFIRMED);
 
         if (event.getParticipantLimit() <= confirmedRequests && event.getParticipantLimit() != 0) {
             throw new NotAvailableException(("Limit of requests for participation has been exceeded"));
@@ -63,8 +63,8 @@ public class RequestServiceImpl implements RequestService {
                 .event(event)
                 .requester(requester)
                 .status(!event.getRequestModeration() || event.getParticipantLimit() == 0
-                        ? EventRequestStatus.CONFIRMED
-                        : EventRequestStatus.PENDING)
+                        ? RequestStatus.CONFIRMED
+                        : RequestStatus.PENDING)
                 .build();
 
         return requestRepository.save(request);
@@ -82,7 +82,7 @@ public class RequestServiceImpl implements RequestService {
             throw new ValidationException(
                     String.format("User %s didn't apply for participation %s", userId, requestId));
         }
-        request.setStatus(EventRequestStatus.CANCELED);
+        request.setStatus(RequestStatus.CANCELED);
 
         return requestRepository.save(request);
     }

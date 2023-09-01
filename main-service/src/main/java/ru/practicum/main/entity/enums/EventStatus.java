@@ -1,6 +1,6 @@
 package ru.practicum.main.entity.enums;
 
-public enum EventPublishedStatus {
+public enum EventStatus {
     PENDING,
     PUBLISHED,
     CANCELED

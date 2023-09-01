@@ -1,6 +1,6 @@
 package ru.practicum.main.entity.enums;
 
-public enum EventRequestStatus {
+public enum RequestStatus {
     PENDING,
     CANCELED,
     CONFIRMED,

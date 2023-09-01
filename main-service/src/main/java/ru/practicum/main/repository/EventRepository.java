@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ru.practicum.main.entity.Event;
-import ru.practicum.main.entity.enums.EventPublishedStatus;
+import ru.practicum.main.entity.enums.EventStatus;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -34,7 +34,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "and (coalesce(:rangeStart, null) is null or e.eventDate >= :rangeStart) " +
             "and (coalesce(:rangeEnd, null) is null or e.eventDate <= :rangeEnd) ")
     List<Event> findByAdmin(@Param("userIds") Collection<Long> userIds,
-                            @Param("states") Collection<EventPublishedStatus> states,
+                            @Param("states") Collection<EventStatus> states,
                             @Param("categoryIds") Collection<Long> categoryIds,
                             @Param("rangeStart") LocalDateTime rangeStart,
                             @Param("rangeEnd") LocalDateTime rangeEnd,

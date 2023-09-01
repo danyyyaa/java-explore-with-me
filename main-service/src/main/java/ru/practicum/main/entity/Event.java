@@ -1,7 +1,7 @@
 package ru.practicum.main.entity;
 
 import lombok.*;
-import ru.practicum.main.entity.enums.EventPublishedStatus;
+import ru.practicum.main.entity.enums.EventStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -58,7 +58,7 @@ public class Event {
 
     @Column(name = "state")
     @Enumerated(EnumType.STRING)
-    private EventPublishedStatus state;
+    private EventStatus state;
 
     @Column(name = "created_on")
     private LocalDateTime createdOn;

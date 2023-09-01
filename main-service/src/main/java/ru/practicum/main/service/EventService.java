@@ -5,7 +5,7 @@ import ru.practicum.main.dto.event.EventFullDto;
 import ru.practicum.main.dto.event.EventShortDto;
 import ru.practicum.main.dto.event.NewEventDto;
 import ru.practicum.main.dto.request.*;
-import ru.practicum.main.entity.enums.EventPublishedStatus;
+import ru.practicum.main.entity.enums.EventStatus;
 import ru.practicum.main.entity.enums.EventSort;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +28,7 @@ public interface EventService {
                                                                           EventRequestStatusUpdateRequestDto dto);
 
     Collection<EventFullDto> getEventsByAdmin(Set<Long> userIds, Set<Long> categoryIds,
-                                              Collection<EventPublishedStatus> states,
+                                              Collection<EventStatus> states,
                                               LocalDateTime rangeStart, LocalDateTime rangeEnd,
                                               Pageable pageable);
 

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import ru.practicum.main.dto.category.CategoryDto;
 import ru.practicum.main.dto.location.LocationDtoCoordinates;
 import ru.practicum.main.dto.user.UserShortDto;
-import ru.practicum.main.entity.enums.EventPublishedStatus;
+import ru.practicum.main.entity.enums.EventStatus;
 
 import java.time.LocalDateTime;
 
@@ -48,11 +48,11 @@ public class EventFullDto {
 
     private Boolean requestModeration;
 
-    private EventPublishedStatus published;
+    private EventStatus published;
 
     private String title;
 
     private Long views;
 
-    private EventPublishedStatus state;
+    private EventStatus state;
 }

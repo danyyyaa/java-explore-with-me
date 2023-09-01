@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.practicum.main.dto.event.EventFullDto;
-import ru.practicum.main.entity.enums.EventPublishedStatus;
+import ru.practicum.main.entity.enums.EventStatus;
 
 import java.time.LocalDateTime;
 
@@ -27,5 +27,5 @@ public class RequestResponseDto {
 
     private Long requester;
 
-    private EventPublishedStatus status;
+    private EventStatus status;
 }

@@ -10,7 +10,7 @@ import ru.practicum.main.entity.Category;
 import ru.practicum.main.entity.Event;
 import ru.practicum.main.entity.Location;
 import ru.practicum.main.entity.User;
-import ru.practicum.main.entity.enums.EventPublishedStatus;
+import ru.practicum.main.entity.enums.EventStatus;
 
 @Mapper(componentModel = "spring", uses = {UserMapper.class, CategoryMapper.class, LocationMapper.class},
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -20,7 +20,7 @@ public interface EventMapper {
     @Mapping(target = "category", source = "category")
     @Mapping(target = "location", source = "location")
     Event toEvent(NewEventDto newEventDto, Location location, Category category,
-                  EventPublishedStatus state, User initiator);
+                  EventStatus state, User initiator);
 
     EventShortDto toEventShortDto(Event event);
 
