@@ -16,3 +16,4 @@ public class EventRequestStatusUpdateRequestDto {
     private Set<Long> requestIds;
     private EventRequestStatus status;
 }
+

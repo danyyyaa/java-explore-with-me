@@ -26,9 +26,10 @@ public class PublicCompilationController {
 
     @GetMapping
     public Collection<CompilationDto> getAllCompilations(@RequestParam(defaultValue = PAGE_DEFAULT_FROM) @PositiveOrZero Integer from,
-                                                         @RequestParam(defaultValue = PAGE_DEFAULT_SIZE) @Positive Integer size) {
+                                                         @RequestParam(defaultValue = PAGE_DEFAULT_SIZE) @Positive Integer size,
+                                                         @RequestParam(required = false) Boolean pinned) {
         Pageable page = new OffsetBasedPageRequest(from, size);
-        return compilationService.getAllCompilations(page);
+        return compilationService.getAllCompilations(page, pinned);
     }
 
     @GetMapping("/{compId}")

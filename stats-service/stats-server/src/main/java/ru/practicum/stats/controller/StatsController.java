@@ -44,7 +44,7 @@ public class StatsController {
                                                      @RequestParam(required = false) Set<String> uris,
                                                      @RequestParam(defaultValue = "false") boolean unique) {
         if (start.isAfter(end)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "End cannot be earlier that start");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "End cannot be earlier than start");
         }
         return endpointHitService.getVisitStats(start, end, uris, unique);
     }

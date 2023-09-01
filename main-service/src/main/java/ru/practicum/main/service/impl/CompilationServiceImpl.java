@@ -33,9 +33,12 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     @Transactional(readOnly = true)
-    public Collection<CompilationDto> getAllCompilations(Pageable pageable) {
-        return compilationRepository.findAll(pageable).getContent()
-                .stream()
+    public Collection<CompilationDto> getAllCompilations(Pageable pageable, Boolean pinned) {
+        List<Compilation> result = pinned != null
+                ? compilationRepository.findByPinned(pinned, pageable)
+                : compilationRepository.findAll(pageable).getContent();
+
+        return result.stream()
                 .map(this::toCompilationDto)
                 .collect(Collectors.toList());
     }
@@ -109,11 +112,13 @@ public class CompilationServiceImpl implements CompilationService {
 
             List<Request> confirmedRequests = requestRepository.findAllByStatusAndEventIdIn(
                     EventRequestStatus.CONFIRMED, eventIds);
+
             Map<Long, Long> requests = confirmedRequests.stream()
                     .collect(Collectors.groupingBy(request -> request.getEvent().getId()))
                     .entrySet()
                     .stream()
                     .collect(Collectors.toMap(Map.Entry::getKey, e -> (long) e.getValue().size()));
+
             compilationEvents.forEach(eventShortDto ->
                     eventShortDto.setConfirmedRequests(requests.getOrDefault(eventShortDto.getId(), 0L)));
         }

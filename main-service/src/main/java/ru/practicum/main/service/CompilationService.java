@@ -8,7 +8,7 @@ import ru.practicum.main.dto.request.UpdateCompilationRequest;
 import java.util.Collection;
 
 public interface CompilationService {
-    Collection<CompilationDto> getAllCompilations(Pageable pageable);
+    Collection<CompilationDto> getAllCompilations(Pageable pageable, Boolean pinned);
 
     CompilationDto getCompilationById(Long compId);
 
