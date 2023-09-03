@@ -1,6 +1,6 @@
 package ru.practicum.stats.client;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,6 +17,7 @@ import java.util.Objects;
 import static ru.practicum.Constant.TIME_PATTERN;
 
 @Service
+@RequiredArgsConstructor
 public class StatsClient {
 
     @Value("${stats-server.url}")
@@ -25,11 +26,6 @@ public class StatsClient {
     private final RestTemplate restTemplate;
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_PATTERN);
-
-    @Autowired
-    public StatsClient(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
 
     public void createHit(EndpointHitRequestDto endpointHitRequestDto) {
         restTemplate.postForLocation(serverUrl.concat("/hit"), endpointHitRequestDto);

@@ -40,6 +40,7 @@ public class NewEventDto {
     private LocalDateTime eventDate;
 
     @Valid
+    @NotNull
     private LocationDtoCoordinates location;
 
     private boolean paid;
