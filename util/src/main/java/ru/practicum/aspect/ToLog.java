@@ -1,4 +1,4 @@
-package ru.practicum.stats.aspect;
+package ru.practicum.aspect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

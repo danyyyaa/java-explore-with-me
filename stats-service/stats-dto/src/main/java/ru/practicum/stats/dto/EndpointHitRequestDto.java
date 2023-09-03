@@ -10,7 +10,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-import static ru.practicum.stats.util.Constant.TIME_PATTERN;
+import static ru.practicum.Constant.TIME_PATTERN;
+
 
 @Data
 @AllArgsConstructor

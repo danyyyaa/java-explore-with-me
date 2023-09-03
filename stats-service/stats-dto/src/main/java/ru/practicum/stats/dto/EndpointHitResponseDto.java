@@ -7,8 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-
-import static ru.practicum.stats.util.Constant.TIME_PATTERN;
+import static ru.practicum.Constant.TIME_PATTERN;
 
 @Data
 @AllArgsConstructor
