@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS events
     state              VARCHAR(9)    NOT NULL,
     created_on         TIMESTAMP     NOT NULL,
     published_on       TIMESTAMP,
-    comments           BIGINT        NOT NULL,
     category_id        BIGINT REFERENCES categories (id) ON DELETE CASCADE,
     location_id        BIGINT REFERENCES locations (id) ON DELETE CASCADE,
     initiator_id       BIGINT REFERENCES users (id) ON DELETE CASCADE

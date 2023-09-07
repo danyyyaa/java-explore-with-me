@@ -42,6 +42,7 @@ public class EventServiceImpl implements EventService {
     private final EventMapper eventMapper;
     private final RequestRepository requestRepository;
     private final RequestMapper requestMapper;
+    private final CommentRepository commentRepository;
     private final StatsClient statsClient;
 
     @Value("${app.name}")
@@ -268,9 +269,6 @@ public class EventServiceImpl implements EventService {
     }
 
     private List<EventShortDto> mapToEventShortDto(Collection<Event> events) {
-        Map<Long, Long> comments = events.stream()
-                .collect(Collectors.toMap(Event::getId, Event::getComments));
-
         List<Long> eventIds = events.stream()
                 .map(Event::getId)
                 .collect(Collectors.toList());
@@ -279,13 +277,19 @@ public class EventServiceImpl implements EventService {
                 .map(eventMapper::toEventShortDto)
                 .collect(Collectors.toList());
 
+        List<Map<Long, Long>> commentCounts = commentRepository.countCommentsByEventIdsIn(eventIds);
+
+        Map<Long, Long> comments = commentCounts.stream()
+                .flatMap(map -> map.entrySet().stream())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
         Map<Long, Long> eventsViews = getViews(eventIds);
         Map<Long, Long> confirmedRequests = getConfirmedRequests(eventIds);
 
         dtos.forEach(el -> {
             el.setViews(eventsViews.getOrDefault(el.getId(), 0L));
             el.setConfirmedRequests(confirmedRequests.getOrDefault(el.getId(), 0L));
-            el.setComments(comments.getOrDefault(el.getComments(), 0L));
+            el.setComments(comments.getOrDefault(el.getId(), 0L));
         });
 
         return dtos;
