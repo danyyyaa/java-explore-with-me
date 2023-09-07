@@ -34,7 +34,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/comments/1?eventId=1",
+          "raw": "http://localhost:8080/comments/1?eventId=2",
           "protocol": "http",
           "host": [
             "localhost"
@@ -47,7 +47,7 @@
           "query": [
             {
               "key": "eventId",
-              "value": "1"
+              "value": "2"
             }
           ]
         }
@@ -82,7 +82,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:8080/comments/1?eventId=1",
+          "raw": "http://localhost:8080/comments/1?eventId=2",
           "protocol": "http",
           "host": [
             "localhost"
@@ -95,7 +95,7 @@
           "query": [
             {
               "key": "eventId",
-              "value": "1"
+              "value": "2"
             }
           ]
         }
