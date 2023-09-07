@@ -25,7 +25,7 @@ public class PrivateCommentController {
     @ResponseStatus(HttpStatus.CREATED)
     public FullCommentDto saveComment(@Positive @PathVariable Long userId,
                                       @Positive @RequestParam Long eventId,
-                               @Valid @RequestBody NewCommentDto dto) {
+                                      @Valid @RequestBody NewCommentDto dto) {
         return commentService.saveComment(userId, dto, eventId);
     }
 
