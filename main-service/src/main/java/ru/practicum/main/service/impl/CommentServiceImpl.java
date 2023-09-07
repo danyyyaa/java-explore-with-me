@@ -1,6 +1,7 @@
 package ru.practicum.main.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.main.dto.comment.FullCommentDto;
@@ -9,6 +10,7 @@ import ru.practicum.main.dto.comment.UpdateCommentDto;
 import ru.practicum.main.entity.Comment;
 import ru.practicum.main.entity.Event;
 import ru.practicum.main.entity.User;
+import ru.practicum.main.entity.enums.EventStatus;
 import ru.practicum.main.exception.NotFoundException;
 import ru.practicum.main.exception.ValidationException;
 import ru.practicum.main.mapper.CommentMapper;
@@ -18,7 +20,6 @@ import ru.practicum.main.repository.UserRepository;
 import ru.practicum.main.service.CommentService;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,9 +38,12 @@ public class CommentServiceImpl implements CommentService {
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new NotFoundException(String.format("User %s not found", userId)));
 
-        Event event = eventRepository.findById(eventId)
-                .orElseThrow(() ->
-                        new NotFoundException(String.format("Event %s not found", eventId)));
+        Event event = eventRepository.findById(eventId).orElseThrow(() ->
+                new NotFoundException(String.format("Event %s not found", eventId)));
+
+        if (!event.getState().equals(EventStatus.PUBLISHED)) {
+            throw new ValidationException(String.format("Event %s isn't published", eventId));
+        }
 
         Comment comment = Comment.builder()
                 .content(newCommentDto.getContent())
@@ -80,8 +84,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Collection<FullCommentDto> getCommentsByEventId(Long eventId) {
-        List<Comment> comments = commentRepository.getCommentsByEventId(eventId);
+    public List<FullCommentDto> getCommentsByEventId(Long eventId, Pageable pageable) {
+        List<Comment> comments = commentRepository.getCommentsByEventId(eventId, pageable);
 
         if (comments.isEmpty()) {
             return Collections.emptyList();

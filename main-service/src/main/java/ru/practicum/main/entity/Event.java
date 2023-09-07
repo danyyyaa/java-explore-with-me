@@ -65,4 +65,14 @@ public class Event {
 
     @Column(name = "published_on")
     private LocalDateTime publishedOn;
+
+    @Column(name = "comments")
+    private Long comments;
+
+    @PrePersist
+    public void prePersist() {
+        if (comments == null) {
+            comments = 0L;
+        }
+    }
 }

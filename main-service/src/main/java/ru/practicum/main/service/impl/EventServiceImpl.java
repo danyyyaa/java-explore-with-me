@@ -268,6 +268,9 @@ public class EventServiceImpl implements EventService {
     }
 
     private List<EventShortDto> mapToEventShortDto(Collection<Event> events) {
+        Map<Long, Long> comments = events.stream()
+                .collect(Collectors.toMap(Event::getId, Event::getComments));
+
         List<Long> eventIds = events.stream()
                 .map(Event::getId)
                 .collect(Collectors.toList());
@@ -282,6 +285,7 @@ public class EventServiceImpl implements EventService {
         dtos.forEach(el -> {
             el.setViews(eventsViews.getOrDefault(el.getId(), 0L));
             el.setConfirmedRequests(confirmedRequests.getOrDefault(el.getId(), 0L));
+            el.setComments(comments.getOrDefault(el.getComments(), 0L));
         });
 
         return dtos;
