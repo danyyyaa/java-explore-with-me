@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS locations, users, categories, events, requests, compilations, events_compilations CASCADE;
-
 CREATE TABLE IF NOT EXISTS locations
 (
     id  BIGSERIAL PRIMARY KEY,
@@ -57,7 +55,18 @@ CREATE TABLE IF NOT EXISTS compilations
 
 CREATE TABLE IF NOT EXISTS events_compilations
 (
-    compilation_id BIGINT REFERENCES compilations (id),
-    event_id       BIGINT REFERENCES events (id),
+    compilation_id BIGINT REFERENCES compilations (id) ON DELETE CASCADE,
+    event_id       BIGINT REFERENCES events (id) ON DELETE CASCADE,
     PRIMARY KEY (compilation_id, event_id)
 );
+
+CREATE TABLE IF NOT EXISTS comments
+(
+    id        BIGSERIAL PRIMARY KEY,
+    content   VARCHAR(3000) NOT NULL,
+    created   TIMESTAMP     NOT NULL,
+    updated   TIMESTAMP,
+    event_id  BIGINT REFERENCES events (id) ON DELETE CASCADE,
+    author_id BIGINT REFERENCES users (id) ON DELETE CASCADE
+);
+
