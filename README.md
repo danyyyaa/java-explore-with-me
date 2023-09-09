@@ -25,8 +25,7 @@ Explore With Me — афиша. В этой афише можно предлож
 
 ---
  Схема БД main-service:
-![Untitled](https://github.com/danyyyaa/java-explore-with-me/assets/118910569/1ace2c75-c47e-44ba-8649-23c166b07d92)
-
+![Untitled (2)](https://github.com/danyyyaa/java-explore-with-me/assets/118910569/1369acbc-27b1-45b6-8e6c-886d5a683b5b)
 
  Схема БД stats-service:
 
