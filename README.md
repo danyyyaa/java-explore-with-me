@@ -10,10 +10,9 @@ Explore With Me — афиша. В этой афише можно предлож
 ## Микросервисная архитектура
 Приложение состоит из 2 сервисов:
 - stats-service - часть приложения, которая собирает, хранит и отдает по запросу статистику по просмотрам.
- API: https://raw.githubusercontent.com/yandex-praktikum/java-explore-with-me/main/ewm-main-service-spec.json
 - main-service - основная часть приложения, в которой происходит вся логика приложения.
- API: https://raw.githubusercontent.com/yandex-praktikum/java-explore-with-me/main/ewm-main-service-spec.json
-
+  
+---
 
 **Жизненный цикл события включает в себя несколько этапов:**
 - Создание
